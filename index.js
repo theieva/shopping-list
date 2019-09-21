@@ -1,29 +1,39 @@
-// 1. user enters text into textbox and clicks add item, add a box to the list
-// 2. check and uncheck items by clicking "check button", cross out checked item
-// 3. delete button would remove item boxes from list
+function removeItem(){
+    $('.shopping-list').on('click', '.shopping-item-delete', function(event){
+        $(this).closest('li').remove()
+    })
+}
+function checkItems() { 
+    $('.shopping-list').on('click', '.shopping-item-toggle', function(event) {
+         $(this) 
+         .closest('li') 
+         .find('.shopping-item') 
+         .toggleClass('shopping-item__checked') 
+        })
+     }
 
-// create an event listener for submit button
-//function receiveInput(){
-$('#js-shopping-list-form').submit(function (event) {
-    $(event.currentTarget)
+function addItems(){
+    $('#js-shopping-list-form').on('submit', function (event) {
+        event.preventDefault();
+        let listItem = $('#shopping-list-entry').val();
+        $('.shopping-list').append(`
+        <li>
+        <span class="shopping-item">${listItem}</span>
+        <div class="shopping-item-controls">
+          <button class="shopping-item-toggle">
+            <span class="button-label">check</span>
+          </button>
+          <button class="shopping-item-delete">
+            <span class="button-label">delete</span>
+          </button>
+        </div>
+      </li>
+        `)
+})  
+}
 
-// take what's in input and create new item
-   
-});
-//}
-
-// target the shopping-list-entry id -- this is the input box
-// copy 
-
-/* <li>
-<span class="shopping-item">TARGET_ITEM</span>
-<div class="shopping-item-controls">
-  <button class="shopping-item-toggle">
-    <span class="button-label">check</span>
-  </button>
-  <button class="shopping-item-delete">
-    <span class="button-label">delete</span>
-  </button>
-</div>
-</li> */
-
+    $(function(){
+        removeItem()
+        checkItems()
+        addItems()
+    })
