@@ -29,6 +29,9 @@ function addItems(){
         </div>
       </li>
         `)
+
+    // clear out add item textbox
+	$('#shopping-list-entry').val('')
 })  
 }
 
